@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
-import google.generativeai as genai
+from groq import Groq
 
 
 if os.path.exists("filenametest1.csv"):
@@ -40,9 +40,10 @@ ax.set_ylabel('Cost ($)')
 ax.plot(df['date'],df['cost'])
 st.pyplot(fig)
 
-genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-model = genai.GenerativeModel("gemini-3.0-flash")
-
+client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 if st.button("Question"):
-    response = model.generate_content("Ask your question")
-    st.write(response.text)
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": "Ask your question"}]
+    )
+    st.write(response.choices[0].message.content)
