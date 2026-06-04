@@ -40,10 +40,10 @@ ax.set_ylabel('Cost ($)')
 ax.plot(df['date'],df['cost'])
 st.pyplot(fig)
 
-user_input = st.text_input("Ask something")
+user_input = st.text_input("Chat with AI")
 
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-if st.button("Chat with AI"):
+if st.button("Send it!"):
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": user_input}]
