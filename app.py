@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
-import anthropic
+import google.generativeai as genai
 
 
 if os.path.exists("filenametest1.csv"):
@@ -40,14 +40,9 @@ ax.set_ylabel('Cost ($)')
 ax.plot(df['date'],df['cost'])
 st.pyplot(fig)
 
-client = anthropic.Anthropic(api_key="your-key-here")
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content("your prompt here")
 
-response = client.messages.create(
-    model="claude-sonnet-4-20250514",
-    max_tokens=1000,
-    messages=[
-        {"role": "user", "content": "your prompt here"}
-    ]
-)
-
+st.write(response.text)
 
