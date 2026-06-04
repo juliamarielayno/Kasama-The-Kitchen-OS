@@ -41,7 +41,7 @@ ax.plot(df['date'],df['cost'])
 st.pyplot(fig)
 
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-3.0-flash")
 
 if st.button("Question"):
     response = model.generate_content("Ask your question")
