@@ -52,7 +52,7 @@ if st.button("Send it!"):
     prompt = f"Hey I'm planning an event called {event_name} for {headcount} people with a ${budget} budget and we want {food} food, can you help me plan a menu?"
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
-        messages=[{"role": "user", "content": user_input}]
+        messages=[{"role": "user", "content": prompt}]
     )
     st.write(response.choices[0].message.content)
 
