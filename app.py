@@ -44,6 +44,7 @@ user_input = st.text_input("Chat with AI")
 
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 if st.button("Send it!"):
+    prompt = f"Hey I'm planning an event called {event_name} for {headcount} people with a ${budget} budget and we want {food} food, can you help me plan a menu?"
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": user_input}]
