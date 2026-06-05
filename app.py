@@ -40,6 +40,11 @@ ax.set_ylabel('Cost ($)')
 ax.plot(df['date'],df['cost'])
 st.pyplot(fig)
 
+event_name = st.text_input("What is the event Name or theme")
+headcount = st.number_input("How many guests are you expecting", min_value = 1, step = 1)
+budget = st.number_input("Target Budget", min_value = 1, step = 1) 
+food = st.text_input("Food Preferences")
+
 user_input = st.text_input("Chat with AI")
 
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
